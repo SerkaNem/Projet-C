@@ -1,20 +1,38 @@
-all: PROJET EXECUTION
-code.o : Code/Bienvenue.c Code/Game.c Code/Mode.c Code/Restart.c Code/Rules.c Code/Fonctions.h
-	@echo 'Pour le bon fonctionnement du projet, nous allons installer la bibliothèque SDL2 et mettre à jour la machine. Si vous ne voulez pas, faites un Ctrl + C.'
-	@sleep 5
-	@sudo apt install libsdl2-2.0-0 libsdl2-gfx-1.0-0 libsdl2-image-2.0-0 libsdl2-mixer-2.0-0 libsdl2-net-2.0-0 libsdl2-ttf-2.0-0 
-	@sudo apt upgrade && sudo apt update && sudo apt upgrade 
-	@clear 
-	@gcc -c Code/Bienvenue.c -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lSDL2_mixer 
-	@gcc -c Code/Game.c -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lSDL2_mixer
-	@gcc -c Code/Restart.c -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lSDL2_mixer
-	@gcc -c Code/Rules.c -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lSDL2_mixer
-	@gcc -c Code/Mode.c -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lSDL2_mixer
-main.o : Code/Main.c
-	@gcc -c Code/Main.c -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lSDL2_mixer
-PROJET : main.o code.o
-	@gcc -o Actium Main.o Bienvenue.o Game.o Mode.o Restart.o Rules.o -lSDL2 -lSDL2_image -lSDL2_mixer
-	@rm *.o
+CFLAGS = -lSDL2 -lSDL2_image -lSDL2_mixer -Wall
+CC = @gcc
 
-EXECUTION :
+all: annonce
+
+annonce :
+	@clear
+	@echo -e '\n*****************************************************************************************************************\n'
+	@echo -e 'Bonjour et Bienvenue sur le projet de VINCENT Esteban et de PELISSIER Théo.\n'
+	@echo -e 'Faites :\n'
+	@echo 'make pour revoir ce message (Ca sert à rien ! ^^)'
+	@echo 'make install pour installer les librairies SDL2 nécessaires dans le cas où vous ne les possédez pas.'
+	@echo 'make build pour compiler le projet'
+	@echo 'make run pour exécuter le projet'
+	@echo -e 'make scratch pour compiler et exécuter en une fois\n' 
+	@echo -e '*******************************************************************************************************************\n'
+
+build : Code/Bienvenue.o Code/Game.o Code/Mode.o Code/Restart.o Code/Rules.o Code/Main.o
+	@clear
+	$(CC) -o Actium $^ $(CFLAGS)
+	@rm Code/*.o 
+
+run :
+	@clear
 	@./Actium
+	@clear
+	@rm Actium 
+
+install : 
+	@clear
+	@echo 'Votre machine va être mise à jour pour pouvoir installer les bibliothèques SDL2.'
+	@echo 'Si vous ne voulez pas, vous pouvez toujours faire Ctrl + C pour annuler la démarche'
+	@sleep 5
+	@sudo apt install libsdl2-2.0-0 libsdl2-gfx-1.0-0 libsdl2-image-2.0-0 libsdl2-mixer-2.0-0 libsdl2-net-2.0-0 libsdl2-ttf-2.0-0
+	@sudo apt upgrade && sudo apt update
+	@clear
+
+scratch : build run 

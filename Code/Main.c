@@ -1,6 +1,4 @@
 #include "Fonctions.h"
-#include <stdio.h>
-#include <stdlib.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_mixer.h>
@@ -21,7 +19,7 @@ int main(int argc, char const *argv[]) {
 		Game(fenetre);
 	} while (Restart(fenetre) == 1);
 	SDL_DestroyWindow(fenetre);
-	Mix_CloseAudio(); // Quitter correctement SDL_Mixer
+	Mix_CloseAudio(); 
 	SDL_Quit();
 	return 0;
 }			
