@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
 #include <SDL2/SDL_image.h>
 
 void Rules(SDL_Window* fenetre) {
@@ -9,6 +10,8 @@ void Rules(SDL_Window* fenetre) {
 	SDL_Event event;
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, IMG_Load("Graphisme/Rules.jpg")); 
 	SDL_Rect position = {0, 0, 900, 900};
+	Mix_Music* music = Mix_LoadMUS("Son/Regles.mp3"); 
+	Mix_PlayMusic(music, 1); 
 
 	while (1) {
 		while(SDL_PollEvent(&event)) {
