@@ -1,0 +1,10 @@
+Lecture des listes de paquets…
+Construction de l'arbre des dépendances…
+Lecture des informations d'état…
+libsdl2-2.0-0 est déjà la version la plus récente (2.0.10+dfsg1-3).
+libsdl2-gfx-1.0-0 est déjà la version la plus récente (1.0.4+dfsg-3).
+libsdl2-image-2.0-0 est déjà la version la plus récente (2.0.5+dfsg1-2).
+libsdl2-mixer-2.0-0 est déjà la version la plus récente (2.0.4+dfsg1-2build1).
+libsdl2-net-2.0-0 est déjà la version la plus récente (2.0.1+dfsg1-4).
+libsdl2-ttf-2.0-0 est déjà la version la plus récente (2.0.15+dfsg1-1).
+0 mis à jour, 0 nouvellement installés, 0 à enlever et 0 non mis à jour.

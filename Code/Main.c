@@ -7,7 +7,6 @@
 
 int main(int argc, char const *argv[]) {
 	srand(time(NULL));
-	system("clear");
 	int choix;
 	SDL_Init(SDL_INIT_EVERYTHING);
 	SDL_Window* fenetre = SDL_CreateWindow("Le jeu du Taquin", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 900, 900, 0);
