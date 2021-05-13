@@ -1,6 +1,5 @@
 CFLAGS = -lSDL2 -lSDL2_image -lSDL2_mixer -Wall
 CC = @gcc
-
 all: annonce
 
 annonce :
@@ -16,7 +15,7 @@ annonce :
 	@echo -e '*******************************************************************************************************************\n'
 
 build : Code/Bienvenue.o Code/Game.o Code/Mode.o Code/Restart.o Code/Rules.o Code/Main.o
-	@clear
+	clear
 	$(CC) -o Actium $^ $(CFLAGS)
 	@rm Code/*.o 
 

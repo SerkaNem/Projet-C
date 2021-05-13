@@ -15,7 +15,7 @@ int main(int argc, char const *argv[]) {
 		do {
 			choix = Bienvenue(fenetre);
 			if(choix == 1) Rules(fenetre);
-		} while (choix == 1);
+		} while (choix);
 		Game(fenetre);
 	} while (Restart(fenetre) == 1);
 	SDL_DestroyWindow(fenetre);
