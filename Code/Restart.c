@@ -7,9 +7,8 @@
 
 int Restart (SDL_Window* fenetre) {
 	SDL_Renderer* renderer = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	SDL_Event event;
-	Mix_Music* music = Mix_LoadMUS("Son/Recommencer.mp3"); 
-	Mix_PlayMusic(music, 1); 
+	SDL_Event event; 
+	Mix_PlayMusic(Mix_LoadMUS("Son/Recommencer.mp3"), 1); 
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, IMG_Load("Graphisme/Restart.jpg")); 
 	SDL_Rect position = {0, 0, 900, 900};
 

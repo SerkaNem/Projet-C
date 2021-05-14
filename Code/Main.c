@@ -14,10 +14,10 @@ int main(int argc, char const *argv[]) {
 	do {
 		do {
 			choix = Bienvenue(fenetre);
-			if(choix == 1) Rules(fenetre);
+			if(choix) Rules(fenetre);
 		} while (choix);
 		Game(fenetre);
-	} while (Restart(fenetre) == 1);
+	} while (Restart(fenetre));
 	SDL_DestroyWindow(fenetre);
 	Mix_CloseAudio(); 
 	SDL_Quit();

@@ -8,34 +8,36 @@
 char image[9][22];
 int Tableau[9];
 int black = 8;
+int mode;
+char WaitNombre[9][22] = {"Graphisme/1.jpg", "Graphisme/2.jpg", "Graphisme/3.jpg", 
+						  "Graphisme/4.jpg", "Graphisme/5.jpg", "Graphisme/6.jpg", 
+						  "Graphisme/7.jpg", "Graphisme/8.jpg", "Graphisme/Noir.jpeg"};
 
-void TabIsTab (int mode) {
+char WaitImage[9][22] = {"Graphisme/1.png", "Graphisme/2.png", "Graphisme/3.png", 
+						 "Graphisme/4.png", "Graphisme/5.png", "Graphisme/6.png", 
+						 "Graphisme/7.png", "Graphisme/8.png", "Graphisme/Noir.jpeg"};
+
+void TabIsTab () {
 	int index;
 	if(mode == 1 || mode == 2) {
-		char Wait[9][22] = {"Graphisme/1.png", "Graphisme/2.png", "Graphisme/3.png", 
-							"Graphisme/4.png", "Graphisme/5.png", "Graphisme/6.png", 
-							"Graphisme/7.png", "Graphisme/8.png", "Graphisme/Noir.jpeg"};
 		for (int i = 0; i < 9; i++) {
 			index = Tableau[i];
-			pastString(Wait[index], i);
+			pastString(WaitImage[index], i);
 		}
 	} else {
-		char Wait[9][22] = {"Graphisme/1.jpg", "Graphisme/2.jpg", "Graphisme/3.jpg", 
-							"Graphisme/4.jpg", "Graphisme/5.jpg", "Graphisme/6.jpg", 
-							"Graphisme/7.jpg", "Graphisme/8.jpg", "Graphisme/Noir.jpeg"};
 		for (int i = 0; i < 9; i++) {
 			index = Tableau[i];
-			pastString(Wait[index], i);
+			pastString(WaitNombre[index], i);
 		}
 	}
 }
 
-void permuter (int appui, int mode) {
+void permuter (int appui) {
 	int Temp =  Tableau[black];
 	Tableau[black] = Tableau[appui];
 	Tableau[appui] = Temp;
 	black = appui;
-	TabIsTab(mode);
+	TabIsTab();
 }
 
 int estDejaPris (int rand, int Tab[], int taille) {
@@ -45,13 +47,13 @@ int estDejaPris (int rand, int Tab[], int taille) {
 	return 1;
 }
 
-void melange(int mode) {
+void melange() {
 	for (int i = 0; i < 8; i++) {
 		Tableau[i] = rand() % 8;
 		if(!(estDejaPris(Tableau[i], Tableau, i))) i--;
 	}
 	Tableau[8] = 8;
-	TabIsTab(mode);
+	TabIsTab();
 }
 
 void pastString (char Wait[], int position) {
@@ -71,9 +73,8 @@ void affichageLogoDebut(SDL_Window* fenetre) {
 	SDL_Renderer* renderer = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	SDL_Event event;
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, IMG_Load("Graphisme/Début.jpg")); 
-	SDL_Rect position = {0, 0, 900, 900};
-	Mix_Music* music = Mix_LoadMUS("Son/Jouer.mp3"); 
-	Mix_PlayMusic(music, 1); 
+	SDL_Rect position = {0, 0, 900, 900}; 
+	Mix_PlayMusic(Mix_LoadMUS("Son/Jouer.mp3"), 1); 
 
 	while(1) {
 		while(SDL_PollEvent(&event)) {
@@ -97,8 +98,7 @@ void affichageLogoFin(SDL_Window* fenetre) {
 	SDL_Event event;
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, IMG_Load("Graphisme/Win.jpg")); 
 	SDL_Rect position = {0, 0, 900, 900};
-	Mix_Music* music = Mix_LoadMUS("Son/Win.mp3"); 
-	Mix_PlayMusic(music, 1); 
+	Mix_PlayMusic(Mix_LoadMUS("Son/Win.mp3"), 1); 
 
 	while(1) {
 		while(SDL_PollEvent(&event)) {
@@ -117,7 +117,7 @@ void affichageLogoFin(SDL_Window* fenetre) {
 	}
 }
 
-int changeIsAllowed(int appui, int mode) {
+int changeIsAllowed(int appui) {
 	if ((mode % 2) == 1) {
 		switch(appui) {
 			case 0:
@@ -183,9 +183,10 @@ int changeIsAllowed(int appui, int mode) {
 } 
 
 void Game(SDL_Window* fenetre) {
-	int mode = Mode(fenetre), appui;
+	int appui;
+	mode = Mode(fenetre); 
 	if(mode == 1 || mode == 2) affichageLogoDebut(fenetre);
-	melange(mode);
+	melange();
 
 	SDL_Renderer* renderer = SDL_CreateRenderer(fenetre, -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
 	SDL_Event event;
@@ -204,8 +205,8 @@ void Game(SDL_Window* fenetre) {
 				case SDL_QUIT: exit(-1);
 				case SDL_MOUSEBUTTONDOWN:
 					appui = ((event.button.x / 300) + (3*(event.button.y / 300)));
-					if(changeIsAllowed(appui, mode)) {
-						permuter(appui, mode);
+					if(changeIsAllowed(appui)) {
+						permuter(appui);
 						for (int i = 0; i < 9; i++) mesTextures[i] = SDL_CreateTextureFromSurface(renderer, IMG_Load(image[i]));
 					}
 					if (verification() == 1) {
