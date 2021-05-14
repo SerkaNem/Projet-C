@@ -32,10 +32,15 @@ void TabIsTab () {
 	}
 }
 
+void pastString (char Wait[], int position) {
+	int i;
+	for (i = 0; Wait[i] != '\0'; i++) image[position][i] = Wait[i];
+	image[position][i] = '\0';
+}
+
 void permuter (int appui) {
-	int Temp =  Tableau[black];
 	Tableau[black] = Tableau[appui];
-	Tableau[appui] = Temp;
+	Tableau[appui] = 8;
 	black = appui;
 	TabIsTab();
 }
@@ -54,12 +59,6 @@ void melange() {
 	}
 	Tableau[8] = 8;
 	TabIsTab();
-}
-
-void pastString (char Wait[], int position) {
-	int i;
-	for (i = 0; Wait[i] != '\0'; i++) image[position][i] = Wait[i];
-	image[position][i] = '\0';
 }
 
 int verification() {
