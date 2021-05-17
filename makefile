@@ -1,5 +1,6 @@
 CFLAGS = -lSDL2 -lSDL2_image -lSDL2_mixer -Wall
 CC = @gcc
+
 all: annonce
 
 annonce :
@@ -30,7 +31,7 @@ install :
 	@echo 'Votre machine va être mise à jour pour pouvoir installer les bibliothèques SDL2.'
 	@echo 'Si vous ne voulez pas, vous pouvez toujours faire Ctrl + C pour annuler la démarche'
 	@sleep 5
-	@sudo apt install libsdl2-2.0-0 libsdl2-gfx-1.0-0 libsdl2-image-2.0-0 libsdl2-mixer-2.0-0 libsdl2-net-2.0-0 libsdl2-ttf-2.0-0
+	@sudo apt install libsdl2-dev libsdl2-gfx-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-net-dev libsdl2-ttf-dev
 	@sudo apt upgrade && sudo apt update
 	@clear
 
